@@ -1,0 +1,33 @@
+Basic Concepts:
+
+Erlang Single Assignment: X = 1234
+	- First, X is not a variable, not them same as in Java and C
+	- Second, = is not an assignment operator; its a pattern matching
+	operator
+	- Erlang variables do not vary: Erlang has single-assignment variables.
+	As the name suggests, they can be given a value only once it has been set
+	- Will get badmatch error if trying to pattern match another value
+
+	- Why use name variables? They are variables, but their value can be changed 
+	only once (that is, they change from being unbound to having a value)
+
+
+Absence of Side Effects Means We Can Parallelize Our Programs:
+
+	- The technical term for memory areas that can be modified is mutable
+	state. Erlang is a functional programming language and has
+	immutable state.
+
+	- Later in the book we'll look at how to program multicore CPUs and see that
+	the consequences of having immutable state are enormous.
+
+	- If you use a conventional programming language such as C or Java to program
+	a multicore CPU, then you will have to content with the problem of shared
+	memory. In order to not corrupt shared memory, the memory has to be locked 
+	while it is accessed. Programs taht access shared memory must not crash while
+	they are manipulating the shared memory
+
+	- In Erlang, there is no mutable state, there is no shared memory, and there
+	are no locks. This makes it easy to parallize our programs.
+
+	
