@@ -1,0 +1,58 @@
+4.1 Modules are where we store code:
+	- Modules are the basic units of code in Erlang
+	- Modules are contained in files with .erl extensions and must be compiled
+	before the code in the modules can be run. Compiled modules have the
+	extension .beam.
+
+
+4.3 Funs: The Basic Unit of Abstraction
+	- Erlang is a functional programming language. Among other things this
+		means that functions can be used as arguments to functions and that
+		functions can return functions. Functions that manipulate functions are
+		called higher-order functions, and the data type that represents a
+		function in Erlang is called a fun.
+
+	- Higher-order functions are the very essence of functional programming
+		languages --- not only can functional programs manipulate regualar data
+		structures, they can also manipulate the functions that transform the data.
+
+	- Funs can be used in the following ways:
+		- To perform thhe same operation on every element of a list. In this case,
+			we pass funs as arguments to functions like lists:map/2, lists:filter/2,
+			and so on. This usage of funs is extremely common.
+		- To create our own control abstractions. This technique is extrememly
+			useful. Erlang has, for example, no for loop. But we can easily create
+			our own for loop. The advantage of creating our own control abstractions
+			is that we can make them do exactly what we want them to do rather than
+			rely on a predefined set of control abstractions that might not behave
+			exactly as we want.
+		- To implement things like reentrant parsing code, parser combinators, or
+			lazy evaluators. In this case, we write functions, which return funs. This
+			is a very powerful technique but can lead to programs that are difficult
+			to debug.
+
+	- Examle: define a fun and assign it to a variable
+		ERL: Double = fun(X) -> 2 * x end.
+		shell: #Fun<erl_eval.6.56006484>
+		- When we define a fun, the Erlang shell prints #Fun<...> where ...
+			is some weird number. (is the pid)
+
+		- There's only one thing we can do with a fun, and that is to apply it to
+			an argument, like this:
+			ERL: Double(2).
+			shell: 4
+	- Funs can have any number of arguments. We can write a function to compute
+		the hypotenuse of a right-angled triangle:
+		ERL: Hypot = fun(X, Y) -> math:sqrt(X*X + Y*Y) end.
+		shell: #Fun<erl_eval.12.115169474>
+		ERL: Hypot(3, 4).
+		shell: 5.0
+
+		- If the number of arguments is incorrect, you'll get an error
+		ERL: Hypot(3).
+		shell: exception error: interpreted function with arity 2 called with one
+					 argument
+
+		- Remember that "arity" is the number of arguments
+
+		
