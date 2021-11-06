@@ -23,3 +23,17 @@ for(I, Max, F)	 -> [F(I)|for(I+1, Max, F)].
 % lib_misc:for(1,10,fun(I) -> I*I end).
 % shell: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
+
+% Quick Sort
+% Here's how to write a sort algorithm using two list comprehensions
+qsort([]) -> [];
+qsort([Pivot|T]) ->
+	qsort([ X || X <- T, X < Pivot ])
+	++ [Pivot] ++
+	qsort([ X || X <- T, X >= Pivot ]).
+	% Note that ++ is the infix append operator. This code is shown for its
+	% elegance rather than its efficiency. Using ++ in this way is not generally
+	% considered good programming practice.
+	% See sect 4.9 (Building lists in natural order for more info)
+
+	% To see how this works, we'll step through the execution
