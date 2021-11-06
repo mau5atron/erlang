@@ -48,7 +48,13 @@ find_in_list(FruitItem) ->
 nested_fun(Multiple, Val) ->
 	% Times -> what to multiply by
 	% X -> value to multiply after we specified what to multiply by
-	Mult = fun(Times) -> ( fun(X) -> X * Times end ) end,
+	Mult = fun(Times) ->
+	 (
+	  fun(X) -> 
+	  	X * Times 
+	  end 
+	 ) 
+	end,
 	% Mult is a generalization of (Double, or just multiplying a number)
 	% Instead of computing a value, it returns a function, which when called
 	% will compute the required value
