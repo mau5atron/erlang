@@ -1,5 +1,15 @@
 -module(lib_misc).
--export([for/3, qsort/1, pythag/1, perms/1, my_tuple_to_list/1]).
+-export([
+	for/3, 
+	qsort/1, 
+	pythag/1, 
+	perms/1, 
+	my_tuple_to_list/1,
+	my_time_func/1,
+	my_date_string/0
+]).
+
+% -include(httpd_util).
 
 % Defining Your Own Control Abstractions
 % 	- So far, we haven't seen any 'if' statements, 'switch' statements,
@@ -149,3 +159,56 @@ my_tuple_to_list(T) ->
 
 	% Returns an integer that is the number of elements in Tuple, for example:
 	[ element(I, T) || I <- lists:seq(1, tuple_size(T)) ].
+
+
+% 3. Look up erlang:now/0, erlang:date/0, erlang:time/0
+% - Write a function called my_time_func(F), which evaluates the fun F and 
+% 	times how long it takes.
+% - Write a function called my_date_string() that neatly formats the current
+% 	date and time of day
+
+% calling this function from erl as 
+% - lib_misc:my_time_func(erlang:now())
+% - lib_misc:my_time_func(erlang:date())
+% - lib_misc:my_time_func(erlang:time())
+
+% erlang:now()
+% Returns the tuple {Megasecs, Secs, Microsecs}, which is the elapsed time since
+% 00:00 GMT, Jan 1, 1970 (zero hour), if provided by the underlying OS.
+% Otherwise some other point in time is chosen. It is also guaranteed that
+% the following calls to this BIF return continously increasing values. Hence,
+% the return value from erlang:now/0 can be used to generate unique timestamps
+% If it is called in a tight loop on a fast machine, the time of the node can
+% become skewed
+% - Can only be used to check the local time of day if the time-zoneeweewdw
+
+% erlang:date()
+% Returns the current date as {Year, Month, Day}
+% The time zone and Daylight Saving Time correction depond on the underlying
+% OS. The return value is based on the OS System Time.
+
+% erlang:time()
+% Returns the current time as {Hour, Minute, Second}
+% The time zone and Daylight saving time correction depend on the underlying OS
+% The return value is based on the OS System Time.
+% Example: {5, 51, 42} 5 AM, 51 MIN, 52 SEC
+my_time_func(F) ->
+	F.
+
+my_date_string() ->
+	CurrentDate = erlang:date(),
+	{Year, Month, Day} = CurrentDate,
+	CurrentTime = erlang:time(),
+	{Hour, Min, Sec} = CurrentTime,
+	% io:fwrite("The date is ~p ~p, ~p~n", 
+	io:fwrite("The date is ~s ~p, ~p @ ~p:~p:~p ~n",
+		[
+			httpd_util:month(Month),
+			calendar:day_of_the_week(CurrentDate),
+			Year,
+			Hour,
+			Min,
+			Sec
+		]
+	).
+	% will return: The date is Nov 3, 2021 @ 6:30:36
