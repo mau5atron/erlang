@@ -1,5 +1,5 @@
 -module(lib_misc).
--export([for/3, qsort/1, pythag/1]).
+-export([for/3, qsort/1, pythag/1, perms/1, my_tuple_to_list/1]).
 
 % Defining Your Own Control Abstractions
 % 	- So far, we haven't seen any 'if' statements, 'switch' statements,
@@ -128,3 +128,24 @@ perms(L)	-> [ [H|T] || H <- L, T <- perms(L--[H]) ].
 % 'This means take H from L in all possible ways and then take T from
 % perms (L -- [H]) (that is, all permutations of the list L with H removed)
 % in all possible ways and return [H|T]
+
+
+
+
+% 2. Write the equivalent of tuple_to_list without using the BIF
+% my_tuple_to_list({}) -> [];
+my_tuple_to_list(T) ->
+	% get tuple items
+	% lists:seq(1, 0) gives an empty list
+	% written like this, we don't need the base case
+
+	% calc size of tuple
+	% element: returns the nth element (numbering from 1) of Tuple
+
+	% lists:seq/2 => lists:seq(From, To) => Returns a sequence of integers that 
+	% starts with From and contains the successive results of adding Incr to the 
+	% previous element, until To is reached or passed (in the latter case, To is 
+	% not an element the sequence). Incr defaults to 1
+
+	% Returns an integer that is the number of elements in Tuple, for example:
+	[ element(I, T) || I <- lists:seq(1, tuple_size(T)) ].

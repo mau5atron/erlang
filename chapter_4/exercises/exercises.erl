@@ -11,6 +11,7 @@
 
 % 2. The BIF tuple_to_list(T) converts the elements of the tuple T to a list
 % 	 Write the same thing only not using the BIF that does this
+% -DONE
 
 % 3. Look up the definitions of erlang:now/0, erlang:date/0, and erlang:time/0
 % 	 Write a function called my_time_func(F), which evaluates the fun F and
