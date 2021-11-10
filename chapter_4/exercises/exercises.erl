@@ -14,9 +14,12 @@
 % -DONE
 
 % 3. Look up the definitions of erlang:now/0, erlang:date/0, and erlang:time/0
-% 	 Write a function called my_time_func(F), which evaluates the fun F and
-% 	 and fun F and times how long it takes. Write a function called
-% 	 my_date_string() that neatly formats the current date and time of day
+% 	 Write a function called my_time_func(F), which evaluates the fun F and 
+% 	 times how long it takes. 
+
+% 	 Write a function called my_date_string() that neatly formats the current 
+% 	 date and time of day
+% - DONE
 
 % 4. Advanced: Look up the manual pages for the Python datetime module. Find
 % 	 out how many of methods in the Python datetime class can be implemented
