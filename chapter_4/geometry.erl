@@ -1,5 +1,7 @@
 -module(geometry).
--export([create_rec/0, create_square/0, area/1]).
+-export([create_rec/0, create_square/0, area/1, perimeter/1]).
+-import(math, [sqrt/1]).
+-define(PI, 3.14159).
 
 create_rec() ->
 	Rectangle = {rectangle, 10, 5},
@@ -21,7 +23,7 @@ create_square() ->
 % pattern matching
 
 area({rectangle, Width, Height}) -> Width * Height;
-area({square, Side})						 -> Side * Side.
+area({square, Side})						 -> Side * Side;
 
 % The function area() consists of two clauses.
 % The clauses are separated by a semicolon, and the final clause is terminated
@@ -36,7 +38,7 @@ area({square, Side})						 -> Side * Side.
 % geometric shapes. We could write this:
 
 area({circle, Radius})					 ->
-	3.14159 * Radius * Radius.
+	?PI * Radius * Radius;
 
 % Note that in this example, the order of the clauses does not matter; the
 % program means the same no matter how the clauses are ordered. This is
@@ -54,6 +56,9 @@ area({circle, Radius})					 ->
 % 	program will fail with a runtime error. This is deliberate.
 % 	This is the way we program in Erlang
 
+
+
+
 % Where to Put Semicolons:
 % - Commas(,) separate arguments in function calls, data constructors, and
 % 	patterns
@@ -63,15 +68,15 @@ area({circle, Radius})					 ->
 % - Periods(.)(followed by whitespace) separate entire functions and expressions
 % 	in the shell
 
-semi_colons_as_separators() ->
-	case f(Something) of
-		Pattern1 ->
-			Expressions1;
-		Pattern2 ->
-			Expressions2;
-		LastPattern ->
-			LastExpression
-	end.
+% semi_colons_as_separators() ->
+% 	case f(Something) of
+% 		Pattern1 ->
+% 			Expressions1;
+% 		Pattern2 ->
+% 			Expressions2;
+% 		LastPattern ->
+% 			LastExpression
+% 	end.
 
 % Note that the last expression (that which immediately precedes the 'end' 
 % key-word) has no semicolon
@@ -80,5 +85,22 @@ semi_colons_as_separators() ->
 % to control structures later.
 
 
+% finding area of right-angled triangle: 1/2 * base * height or A*B/2
+area({right_triangle, Base, Height}) ->
+	(Base*Height)/2.
 
+% Perimeter of rectangle 2(L + W)
+perimeter({rectangle, Length, Width}) ->
+	2*(Length+Width);
+
+% Perimeter (circumference) of circle 2*PI*R
+% call global constants with ?PI
+perimeter({circle, R}) ->
+	2*?PI*R;
+
+perimeter({triangle, A, Base, C}) ->
+	A+Base+C;
+
+perimeter({right_triangle, A, B}) ->
+	A+B+sqrt((A*A)+(B*B)).
 
