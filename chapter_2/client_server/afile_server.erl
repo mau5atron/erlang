@@ -8,6 +8,7 @@ before(Dir) ->
 	%io:format("Args: ~p\n", [Dir]).
 	io:format("file_list: ~p\n", [file:list_dir(Dir)]).
 
+% spawn(Module, Function, Args) -> pid()
 start(Dir) ->
 	spawn(afile_server, loop, [Dir]).
 
