@@ -49,8 +49,8 @@ loop(Dir) -> % writing an infinite loop
 %	|						 |	 to whom the reply should be sent                                                                                                         
 % +------------+   
 
-% +-----------+      The reply sent by the server contains the argument self() 
-% |						|			 (in this case self() is the process identifier of the server)
+% +-----------+  The reply sent by the server contains the argument self() 
+% |						|	 (in this case self() is the process identifier of the server)
 % |  			    |                                                                                                         
 % |  self()   |  =   This identifier is added to the message so that the client 
 %	|						|			 can check that the message the client received came from the 
