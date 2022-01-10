@@ -14,4 +14,3 @@
 % 	 into packets and recover the original terms by decoding the packets.
 
 % 5. Write a function to reverse the bits in a binary.
-
