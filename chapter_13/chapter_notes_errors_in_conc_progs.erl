@@ -415,6 +415,7 @@ programming_for_fault_tolerance() ->
 			% 5>
 			% =ERROR REPORT==== 14-May-2013::10:05:42 === Error in process <0.36.0> with exit value:
 			%    {badarg,[{erlang,list_to_atom,[hello],[]}]}
+			
 			% The function that is invoked when the process dies can, of course, perform any computation it likes: it can ignore the error, log the error, or restart the application. The choice is up to the programmer.
 
 
