@@ -10,5 +10,5 @@ nano_client_eval(Str) ->
 			io:format("Client received binary = ~p~n", [Bin]),
 			Val = binary_to_term(Bin),
 			io:format("Client result = ~p~n", [Val]),
-			gen_tcp:close(Socket)
+			gen_tcp:close(Socket) % This will close the socket right after0
 	end.

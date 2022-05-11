@@ -326,3 +326,57 @@ receive_data(Socket, SoFar) ->
 	% process each time gen_tcp:accept gets a new connection.
 
 	
+		% start_parallel_server() ->
+			% {ok, Listen} = get_tcp:listen(...),
+			% spawn(fun() -> par_connect(Listen) end).
+
+		% par_connect(Listen) ->
+			% {ok, Socket} -> get_tcp:accept(Listen),
+			% spawn(fun() -> par_connect(Listen) end),
+			% loop(Socket).
+
+		% loop(..) -> %% as before
+
+	% This code is similar to the sequential server that we saw earlier. The
+	% crucial difference is the addition of a spawn, which makes sure that we
+	% create a parallel process for each new socket connection. Now is a good
+	% chance to compare the two. You should look at the placement of the
+	% spawn statements and see how these turned into a sequential server into
+	% a parallel server.
+
+	% All three servers call gen_tcp:listen and gen_tcp:accept; the only
+	% differnece is whether we call these functions in a parallel program or
+	% a sequential program.
+
+	% Notes:
+
+		% Be aware of the following:
+
+			% The process that creates a socket (by calling gen_tcp:accept or
+			% gen_tcp:connect) is said to be the controlling process for that
+			% socket. All messages from the socket will be sent to the
+			% controlling process; if the controlling process dies, then the
+			% socket will be closed. The controlling process for a socket can be
+			% changed to NewPid by calling gen_tcp:controlling_process(Socket,
+			% NewPid)
+
+			% Our parallel server can potentially create many thousands of
+			% connections. We might want to limit the maximum number of
+			% simultaneous connections. This can be done by maintaining a counter
+			% on how many connections are alive at any one time. We increment
+			% this counter every time we get a new connection, and decrement the
+			% counter each time a connection finishes. We can use this to limit
+			% the total number of simultaneous connections in the system.
+
+			% After we have accepted a connection, it's a good idea to explicitly
+			% set the required socket options, like this:
+
+				% {ok, Socket} = gen_tcp:accept(Listen),
+				% inet:setopts(Socket, [{packet, 4}, binary, {nodelay, true}, 
+				% {active, true}]),
+				% loop(Socket).
+
+			% As of Erlang version R11B-3, several Erlang processes are allowed
+			% to call gen_tcp:accept/1 on the same listen socket. This simplifies
+			% making a parallel server, because you can have a pool of prespawned
+			% processes, all waiting in gen_tcp:accept/1
