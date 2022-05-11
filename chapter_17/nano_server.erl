@@ -1,12 +1,13 @@
 -module(nano_server).
+-import(lib_misc, [eval_expression/1]).
 -export([start_nano_server/0]).
 
 start_nano_server() ->
-	{ok, Listen} = gen_tcp:listen(2345, [binary, {packet, 4},
+	{ok, ListenSocket} = gen_tcp:listen(2345, [binary, {packet, 4},
 																			        {reuseaddr, true},
 																			        {active, true}]),
-	{ok, Socket} = gen_tcp:accept(Listen),
-	gen_tcp:close(Listen),
+	{ok, Socket} = gen_tcp:accept(ListenSocket),
+	gen_tcp:close(ListenSocket),
 	loop(Socket).
 
 loop(Socket) ->
@@ -15,7 +16,11 @@ loop(Socket) ->
 			io:format("Server received binary = ~p~n", [Bin]),
 			Str = binary_to_term(Bin),
 			io:format("Server (unpacked) ~p~n", [Str]),
-			Reply = lib_misc:string2value(Str),
+			% Reply = lib_misc:string2value(Str), % implementing this in lib_misc
+
+			% when we call eval_expression() we should not be able to call other
+			% local or non local functions
+			Reply = lib_misc:eval_expression(Str),
 			io:format("Server replying = ~p~n", [Reply]),
 			gen_tcp:send(Socket, term_to_binary(Reply)),
 			loop(Socket);
