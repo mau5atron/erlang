@@ -1,0 +1,27 @@
+{"1.2.0",
+[{<<"amqp_client">>,{pkg,<<"amqp_client">>,<<"3.5.6">>},0},
+ {<<"cowboy">>,
+  {git,"https://github.com/extend/cowboy.git",
+       {ref,"04ca4c5d31a92d4d3de087bbd7d6021dc4a6d409"}},
+  0},
+ {<<"cowlib">>,
+  {git,"https://github.com/ninenines/cowlib",
+       {ref,"e9448e5628c8c1d9083223ff973af8de31a566d1"}},
+  1},
+ {<<"mochijson2">>,
+  {git,"https://github.com/tel/mochijson2.git",
+       {ref,"4b6811027e711c4edb74de52a0dd3f0e5c9e6cd9"}},
+  0},
+ {<<"rabbit_common">>,{pkg,<<"rabbit_common">>,<<"3.5.6">>},1},
+ {<<"ranch">>,
+  {git,"https://github.com/ninenines/ranch",
+       {ref,"a692f44567034dacf5efcaa24a24183788594eb7"}},
+  1}]}.
+[
+{pkg_hash,[
+ {<<"amqp_client">>, <<"ED7E63122F32AF1D503D134E6C1B088A0627E89C6B5C77B92984C841CB0939BE">>},
+ {<<"rabbit_common">>, <<"AD541BE86F08CDB1C04320EB4353AD30F25555569C95CC062AF28CF79B74D085">>}]},
+{pkg_hash_ext,[
+ {<<"amqp_client">>, <<"3DC10A5BA146FD737502D407A1AFEE0C460B4477D66CA361240985F412A2E9A3">>},
+ {<<"rabbit_common">>, <<"9335AB3EBC4E8E140D7BC9B1B0E7EE99C0AA87D0A746B704184121BA35C04F1C">>}]}
+].

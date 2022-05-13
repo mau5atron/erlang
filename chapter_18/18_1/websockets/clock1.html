@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Clock1</title>
+	<link rel="stylesheet" href="./clock1.css" type="text/css">
+
+</head>
+<body>
+	<div id="clock"></div>
+	<button id="start" class="live_button">start</button>
+	<button id="stop" class="live_button">stop</button>
+	<script>
+		(function(){
+			// page init code
+			function readyDoc(fn){
+				// check if the dom is available
+				if (document.readyState === "complete" || document.readyState === "interactive"){
+					setTimeout(fn, 1);
+				} else {
+					document.addEventListener("DOMContentLoaded", fn);
+				}
+			}
+
+			readyDoc(function(){
+				// runs when page is ready
+				var socket = new WebSocket("ws://localhost:2233");
+
+				// listen for messages from Erlang
+				socket.addEventListener("message", function(event){
+					console.log("Message from server: ", event.data);
+				});
+			});
+		})();
+	</script>
+</body>
+</html>
