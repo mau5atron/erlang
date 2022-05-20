@@ -5,7 +5,14 @@
   {mod, {websocket_example_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    cowboy, 
+    % added cowboy to entry applications section
+    % when app is packed into release, cowboy will be started 
+    % automatically upon release launch
+    inets,
+    mnesia,
+    amqp_client
    ]},
   {env,[]},
   {modules, []},
